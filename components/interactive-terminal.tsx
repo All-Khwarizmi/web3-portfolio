@@ -1,72 +1,85 @@
-"use client"
+"use client";
 
-import type React from "react"
+import type React from "react";
 
-import { useState, useEffect, useRef } from "react"
-import { cn } from "@/lib/utils"
-import { Code, Mail, User, FileText, Github, Twitter, Linkedin } from "lucide-react"
+import { useState, useEffect, useRef } from "react";
+import { cn } from "@/lib/utils";
+import {
+  Code,
+  Mail,
+  User,
+  FileText,
+  Github,
+  Twitter,
+  Linkedin,
+} from "lucide-react";
 
 type CommandResult = {
-  content: React.ReactNode
-  isHtml?: boolean
-}
+  content: React.ReactNode;
+  isHtml?: boolean;
+};
 
 export function InteractiveTerminal() {
-  const [input, setInput] = useState("")
-  const [commandHistory, setCommandHistory] = useState<string[]>([])
-  const [historyIndex, setHistoryIndex] = useState(-1)
-  const [output, setOutput] = useState<{ command: string; result: CommandResult }[]>([
+  const [input, setInput] = useState("");
+  const [commandHistory, setCommandHistory] = useState<string[]>([]);
+  const [historyIndex, setHistoryIndex] = useState(-1);
+  const [output, setOutput] = useState<
+    { command: string; result: CommandResult }[]
+  >([
     {
       command: "",
       result: {
         content: (
           <div>
-            <p className="text-green-400 mb-2">Welcome to Jason's Web3 Security Portfolio Terminal!</p>
+            <p className="text-green-400 mb-2">
+              Welcome to Jason's Web3 Security Portfolio Terminal!
+            </p>
             <p className="text-gray-300 mb-2">
-              Type <span className="text-cyan-400">help</span> to see available commands.
+              Type <span className="text-cyan-400">help</span> to see available
+              commands.
             </p>
           </div>
         ),
         isHtml: true,
       },
     },
-  ])
-  const [inputLocked, setInputLocked] = useState(false)
+  ]);
+  const [inputLocked, setInputLocked] = useState(false);
 
-  const terminalRef = useRef<HTMLDivElement>(null)
-  const inputRef = useRef<HTMLInputElement>(null)
+  const terminalRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
 
   // Auto-scroll to bottom when output changes
   useEffect(() => {
     if (terminalRef.current) {
-      terminalRef.current.scrollTop = terminalRef.current.scrollHeight
+      terminalRef.current.scrollTop = terminalRef.current.scrollHeight;
     }
-  }, [output])
+  }, [output]);
 
   // Focus input when terminal is clicked
   useEffect(() => {
     const handleClick = () => {
       if (inputRef.current && !inputLocked) {
-        inputRef.current.focus()
+        inputRef.current.focus();
       }
-    }
+    };
 
-    const terminal = terminalRef.current
+    const terminal = terminalRef.current;
     if (terminal) {
-      terminal.addEventListener("click", handleClick)
-      return () => terminal.removeEventListener("click", handleClick)
+      terminal.addEventListener("click", handleClick);
+      return () => terminal.removeEventListener("click", handleClick);
     }
-  }, [inputLocked])
+  }, [inputLocked]);
 
   const processCommand = async (cmd: string): Promise<CommandResult> => {
-    const command = cmd.trim().toLowerCase()
+    const command = cmd.trim().toLowerCase();
 
     // Simulate network delay for more realistic terminal feel
-    await new Promise((resolve) => setTimeout(resolve, 300))
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     if (command === "" || command === "cls" || command === "clear") {
-      setOutput([])
-      return { content: "" }
+      setOutput([]);
+      return { content: "" };
     }
 
     if (command === "help") {
@@ -104,11 +117,13 @@ export function InteractiveTerminal() {
                 <div>Show all information</div>
               </div>
             </div>
-            <p className="text-gray-400 mt-2">Type any command to continue...</p>
+            <p className="text-gray-400 mt-2">
+              Type any command to continue...
+            </p>
           </div>
         ),
         isHtml: true,
-      }
+      };
     }
 
     if (command === "about") {
@@ -120,21 +135,23 @@ export function InteractiveTerminal() {
               <span className="text-cyan-400 font-bold">About Me</span>
             </div>
             <p className="text-gray-300">
-              I specialize in identifying vulnerabilities in smart contracts and blockchain protocols, with a focus on
-              securing the Web3 ecosystem against emerging threats.
+              I specialize in identifying vulnerabilities in smart contracts and
+              blockchain protocols, with a focus on securing the Web3 ecosystem
+              against emerging threats.
             </p>
             <p className="text-gray-300">
-              My approach combines deep technical expertise with innovative tooling to make blockchain technology more
-              secure, transparent, and accessible to developers and users alike.
+              My approach combines deep technical expertise with innovative
+              tooling to make blockchain technology more secure, transparent,
+              and accessible to developers and users alike.
             </p>
-            <p className="text-gray-300">
+            {/* <p className="text-gray-300">
               With over 5 years of experience in blockchain security, I've helped secure millions in TVL across various
               DeFi protocols and NFT platforms.
-            </p>
+            </p> */}
           </div>
         ),
         isHtml: true,
-      }
+      };
     }
 
     if (command === "projects") {
@@ -143,15 +160,20 @@ export function InteractiveTerminal() {
           <div className="space-y-4">
             <div className="flex items-center">
               <Code className="text-purple-400 mr-2 h-5 w-5" />
-              <span className="text-purple-400 font-bold">Featured Projects</span>
+              <span className="text-purple-400 font-bold">
+                Featured Projects
+              </span>
             </div>
 
             <div className="space-y-3">
               <div className="border border-cyan-700/30 rounded-md p-3 bg-cyan-900/10">
-                <h3 className="text-cyan-400 font-mono">Security Research Portfolio</h3>
+                <h3 className="text-cyan-400 font-mono">
+                  Security Research Portfolio
+                </h3>
                 <p className="text-gray-300 text-sm my-1">
-                  Comprehensive collection of smart contract vulnerability assessments and security methodologies for
-                  blockchain protocols.
+                  Comprehensive collection of smart contract vulnerability
+                  assessments and security methodologies for blockchain
+                  protocols.
                 </p>
                 <div className="flex gap-2 mt-2">
                   <span className="text-xs bg-cyan-950/30 text-cyan-400 border border-cyan-700/50 px-2 py-0.5 rounded">
@@ -176,8 +198,8 @@ export function InteractiveTerminal() {
               <div className="border border-purple-700/30 rounded-md p-3 bg-purple-900/10">
                 <h3 className="text-purple-400 font-mono">EVM Visualizer</h3>
                 <p className="text-gray-300 text-sm my-1">
-                  Interactive tool for visualizing Ethereum Virtual Machine execution, helping developers understand
-                  contract behavior.
+                  Interactive tool for visualizing Ethereum Virtual Machine
+                  execution, helping developers understand contract behavior.
                 </p>
                 <div className="flex gap-2 mt-2">
                   <span className="text-xs bg-purple-950/30 text-purple-400 border border-purple-700/50 px-2 py-0.5 rounded">
@@ -211,8 +233,8 @@ export function InteractiveTerminal() {
               <div className="border border-green-700/30 rounded-md p-3 bg-green-900/10">
                 <h3 className="text-green-400 font-mono">AgentDex</h3>
                 <p className="text-gray-300 text-sm my-1">
-                  AI-powered trading agent system for decentralized exchanges, featuring secure architecture and
-                  advanced trading strategies.
+                  AI-powered trading agent system for decentralized exchanges,
+                  featuring secure architecture and advanced trading strategies.
                 </p>
                 <div className="flex gap-2 mt-2">
                   <span className="text-xs bg-green-950/30 text-green-400 border border-green-700/50 px-2 py-0.5 rounded">
@@ -224,12 +246,12 @@ export function InteractiveTerminal() {
                 </div>
                 <div className="mt-2 text-sm">
                   <a
-                    href="https://github.com/All-Khwarizmi/agentdex"
+                    href="https://github.com/All-Khwarizmi/agent-dex"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-green-400 hover:underline"
                   >
-                    github.com/All-Khwarizmi/agentdex
+                    github.com/All-Khwarizmi/agent-dex
                   </a>
                 </div>
               </div>
@@ -237,7 +259,7 @@ export function InteractiveTerminal() {
           </div>
         ),
         isHtml: true,
-      }
+      };
     }
 
     if (command === "skills") {
@@ -251,7 +273,9 @@ export function InteractiveTerminal() {
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
               <div className="space-y-2">
-                <h3 className="text-cyan-400 font-mono border-b border-cyan-900/50 pb-1">Security & Blockchain</h3>
+                <h3 className="text-cyan-400 font-mono border-b border-cyan-900/50 pb-1">
+                  Security & Blockchain
+                </h3>
                 <ul className="list-disc list-inside text-gray-300 space-y-1">
                   <li>Solidity</li>
                   <li>Smart Contract Auditing</li>
@@ -264,7 +288,9 @@ export function InteractiveTerminal() {
               </div>
 
               <div className="space-y-2">
-                <h3 className="text-purple-400 font-mono border-b border-purple-900/50 pb-1">Development</h3>
+                <h3 className="text-purple-400 font-mono border-b border-purple-900/50 pb-1">
+                  Development
+                </h3>
                 <ul className="list-disc list-inside text-gray-300 space-y-1">
                   <li>TypeScript</li>
                   <li>React & Next.js</li>
@@ -277,7 +303,9 @@ export function InteractiveTerminal() {
               </div>
 
               <div className="space-y-2">
-                <h3 className="text-green-400 font-mono border-b border-green-900/50 pb-1">AI & Data</h3>
+                <h3 className="text-green-400 font-mono border-b border-green-900/50 pb-1">
+                  AI & Data
+                </h3>
                 <ul className="list-disc list-inside text-gray-300 space-y-1">
                   <li>Python</li>
                   <li>TensorFlow</li>
@@ -291,7 +319,7 @@ export function InteractiveTerminal() {
           </div>
         ),
         isHtml: true,
-      }
+      };
     }
 
     if (command === "contact") {
@@ -300,12 +328,15 @@ export function InteractiveTerminal() {
           <div className="space-y-3">
             <div className="flex items-center">
               <Mail className="text-amber-400 mr-2 h-5 w-5" />
-              <span className="text-amber-400 font-bold">Contact Information</span>
+              <span className="text-amber-400 font-bold">
+                Contact Information
+              </span>
             </div>
 
             <p className="text-gray-300">
-              Interested in collaborating on a project, need a security audit, or just want to chat about Web3 security?
-              Reach out through any of these channels:
+              Interested in collaborating on a project, need a security audit,
+              or just want to chat about Web3 security? Reach out through any of
+              these channels:
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-2">
@@ -351,23 +382,25 @@ export function InteractiveTerminal() {
             </div>
 
             <div className="mt-4 p-3 border border-amber-700/30 rounded-md bg-amber-900/10">
-              <p className="text-amber-400 font-mono mb-1">Security Audit Requests</p>
+              <p className="text-amber-400 font-mono mb-1">
+                Security Audit Requests
+              </p>
               <p className="text-gray-300 text-sm">
-                For security audit inquiries, please include project details, timeline, and scope in your initial
-                message.
+                For security audit inquiries, please include project details,
+                timeline, and scope in your initial message.
               </p>
             </div>
           </div>
         ),
         isHtml: true,
-      }
+      };
     }
 
     if (command === "all") {
       // Process multiple commands in sequence
-      setInputLocked(true)
+      setInputLocked(true);
 
-      const commands = ["about", "projects", "skills", "contact"]
+      const commands = ["about", "projects", "skills", "contact"];
 
       for (const cmd of commands) {
         setOutput((prev) => [
@@ -376,26 +409,26 @@ export function InteractiveTerminal() {
             command: cmd,
             result: { content: `Processing ${cmd}...` },
           },
-        ])
+        ]);
 
-        await new Promise((resolve) => setTimeout(resolve, 500))
+        await new Promise((resolve) => setTimeout(resolve, 500));
 
-        const result = await processCommand(cmd)
+        const result = await processCommand(cmd);
 
         setOutput((prev) => {
-          const newOutput = [...prev]
+          const newOutput = [...prev];
           newOutput[newOutput.length - 1] = {
             command: cmd,
             result,
-          }
-          return newOutput
-        })
+          };
+          return newOutput;
+        });
 
-        await new Promise((resolve) => setTimeout(resolve, 1000))
+        await new Promise((resolve) => setTimeout(resolve, 1000));
       }
 
-      setInputLocked(false)
-      return { content: "" }
+      setInputLocked(false);
+      return { content: "" };
     }
 
     return {
@@ -403,23 +436,24 @@ export function InteractiveTerminal() {
         <div>
           <p className="text-red-400">Command not found: {command}</p>
           <p className="text-gray-300">
-            Type <span className="text-cyan-400">help</span> to see available commands.
+            Type <span className="text-cyan-400">help</span> to see available
+            commands.
           </p>
         </div>
       ),
       isHtml: true,
-    }
-  }
+    };
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
 
-    if (input.trim() === "" || inputLocked) return
+    if (input.trim() === "" || inputLocked) return;
 
-    const command = input
-    setInput("")
-    setCommandHistory((prev) => [command, ...prev])
-    setHistoryIndex(-1)
+    const command = input;
+    setInput("");
+    setCommandHistory((prev) => [command, ...prev]);
+    setHistoryIndex(-1);
 
     setOutput((prev) => [
       ...prev,
@@ -427,50 +461,63 @@ export function InteractiveTerminal() {
         command,
         result: { content: "Processing..." },
       },
-    ])
+    ]);
 
-    const result = await processCommand(command)
+    const result = await processCommand(command);
 
     setOutput((prev) => {
-      const newOutput = [...prev]
+      const newOutput = [...prev];
       newOutput[newOutput.length - 1] = {
         command,
         result,
-      }
-      return newOutput
-    })
-  }
+      };
+      return newOutput;
+    });
+  };
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (inputLocked) return
+    if (inputLocked) return;
 
     if (e.key === "ArrowUp") {
-      e.preventDefault()
+      e.preventDefault();
       if (commandHistory.length > 0) {
-        const newIndex = Math.min(historyIndex + 1, commandHistory.length - 1)
-        setHistoryIndex(newIndex)
-        setInput(commandHistory[newIndex])
+        const newIndex = Math.min(historyIndex + 1, commandHistory.length - 1);
+        setHistoryIndex(newIndex);
+        setInput(commandHistory[newIndex]);
       }
     } else if (e.key === "ArrowDown") {
-      e.preventDefault()
+      e.preventDefault();
       if (historyIndex > 0) {
-        const newIndex = historyIndex - 1
-        setHistoryIndex(newIndex)
-        setInput(commandHistory[newIndex])
+        const newIndex = historyIndex - 1;
+        setHistoryIndex(newIndex);
+        setInput(commandHistory[newIndex]);
       }
     } else if (e.key === "Tab") {
-      e.preventDefault()
+      e.preventDefault();
       // Simple autocomplete for commands
-      const commands = ["help", "about", "projects", "skills", "contact", "clear", "all"]
-      const matchingCommand = commands.find((cmd) => cmd.startsWith(input.toLowerCase()))
+      const commands = [
+        "help",
+        "about",
+        "projects",
+        "skills",
+        "contact",
+        "clear",
+        "all",
+      ];
+      const matchingCommand = commands.find((cmd) =>
+        cmd.startsWith(input.toLowerCase())
+      );
       if (matchingCommand) {
-        setInput(matchingCommand)
+        setInput(matchingCommand);
       }
     }
-  }
+  };
 
   return (
-    <div ref={terminalRef} className="bg-black font-mono text-sm text-gray-300 p-4 h-[400px] overflow-y-auto">
+    <div
+      ref={terminalRef}
+      className="bg-black font-mono text-sm text-gray-300 p-4 h-[400px] overflow-y-auto"
+    >
       {output.map((item, index) => (
         <div key={index} className="mb-4">
           {item.command && (
@@ -479,8 +526,14 @@ export function InteractiveTerminal() {
               <span className="text-cyan-400">{item.command}</span>
             </div>
           )}
-          <div className={cn("pl-4", { "terminal-output": !item.result.isHtml })}>
-            {item.result.isHtml ? item.result.content : <pre>{item.result.content}</pre>}
+          <div
+            className={cn("pl-4", { "terminal-output": !item.result.isHtml })}
+          >
+            {item.result.isHtml ? (
+              item.result.content
+            ) : (
+              <pre>{item.result.content}</pre>
+            )}
           </div>
         </div>
       ))}
@@ -500,6 +553,5 @@ export function InteractiveTerminal() {
         />
       </form>
     </div>
-  )
+  );
 }
-
