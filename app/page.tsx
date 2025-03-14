@@ -203,11 +203,11 @@ function Web3ProjectCard({
   };
 
   const iconColorClasses = {
-    cyan: "text-cyan-600",
-    purple: "text-purple-600",
-    green: "text-green-600",
-    amber: "text-amber-600",
-    pink: "text-pink-600",
+    cyan: "text-cyan-400",
+    purple: "text-purple-400",
+    green: "text-green-400",
+    amber: "text-amber-400",
+    pink: "text-pink-400",
   };
 
   const tagColorClasses = {
@@ -266,11 +266,7 @@ function Web3ProjectCard({
               </a>
             </Button>
           )}
-          <Button
-            asChild
-            size="sm"
-            className={cn("h-7 px-2 text-xs", iconColorClasses[color])}
-          >
+          <Button asChild size="sm" className={cn("h-7 px-2 text-xs")}>
             <a
               href={link}
               target="_blank"
