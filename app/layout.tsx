@@ -17,18 +17,18 @@ export const metadata: Metadata = {
   authors: [{ name: "Jason Suarez" }],
   openGraph: {
     type: "website",
-    locale: "fr_FR",
+    locale: "en_US",
     url: "https://jason-suarez.com/",
-    siteName: "Portfolio de Jason Suarez",
-    title: "Jason Suarez | Développeur Frontend React & TypeScript",
+    siteName: "Jason Suarez Portfolio",
+    title: "Jason Suarez | Web3 Security Researcher & Developer",
     description:
-      "Explorez mon portfolio pour découvrir mes compétences en développement web, mes projets innovants, et comment je peux aider votre entreprise à créer des interfaces utilisateur performantes et modernes.",
+      "Explore my portfolio showcasing smart contract security research, blockchain development projects, and how I can help secure your Web3 applications.",
     images: [
       {
         url: "/portfolio-cover.png",
         width: 1200,
         height: 630,
-        alt: "Portfolio de Jason Suarez - Développeur Frontend",
+        alt: "Jason Suarez - Web3 Security Researcher & Developer Portfolio",
       },
     ],
   },
@@ -36,19 +36,36 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@swarecito",
     creator: "@swarecito",
-    title: "Jason Suarez | Développeur Frontend React & TypeScript",
+    title: "Jason Suarez | Web3 Security Researcher & Developer",
     description:
-      "Découvrez mon portfolio de développeur frontend spécialisé en React, TypeScript et Next.js. Projets innovants et solutions web modernes.",
+      "Discover my portfolio focused on blockchain security, smart contract auditing, and Web3 development with expertise in Solidity and security analysis.",
     images: ["/portfolio-cover.png"],
   },
-  themeColor: "#000000",
+  themeColor: "#0A0E17", // Dark blue/black for cyberpunk aesthetic
+  keywords: [
+    "web3 security",
+    "smart contract auditing",
+    "blockchain developer",
+    "solidity security",
+    "ethereum",
+    "security researcher",
+    "web3 development",
+    "blockchain security",
+  ],
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
       { url: "/icon.svg", type: "image/svg+xml" },
     ],
-    apple: [{ url: "/portfolio-cover.png" }],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
+  verification: {
+    google: "your-google-verification-id", // Add your verification ID if you have one
+  },
+  alternates: {
+    canonical: "https://jason-suarez.com",
+  },
+  category: "Technology",
 };
 export default function RootLayout({
   children,
