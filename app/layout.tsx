@@ -41,7 +41,7 @@ export const metadata: Metadata = {
       "Discover my portfolio focused on blockchain security, smart contract auditing, and Web3 development with expertise in Solidity and security analysis.",
     images: ["/portfolio-cover.png"],
   },
-  themeColor: "#0A0E17", // Dark blue/black for cyberpunk aesthetic
+
   keywords: [
     "web3 security",
     "smart contract auditing",
@@ -59,13 +59,28 @@ export const metadata: Metadata = {
     ],
     apple: [{ url: "/apple-touch-icon.png", sizes: "180x180" }],
   },
-  verification: {
-    google: "your-google-verification-id", // Add your verification ID if you have one
-  },
+
   alternates: {
     canonical: "https://jason-suarez.com",
   },
   category: "Technology",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#0A0E17",
 };
 export default function RootLayout({
   children,

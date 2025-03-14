@@ -32,7 +32,7 @@ export function InteractiveTerminal() {
         content: (
           <div>
             <p className="text-green-400 mb-2">
-              Welcome to Jason's Web3 Security Portfolio Terminal!
+              Welcome to Jason&apos;s Web3 Security Portfolio Terminal!
             </p>
             <p className="text-gray-300 mb-2">
               Type <span className="text-cyan-400">help</span> to see available
